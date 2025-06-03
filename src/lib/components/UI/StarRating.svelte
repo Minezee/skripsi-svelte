@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Star, StarHalf, StarOff } from 'lucide-svelte';
+  import { Star, StarHalf } from 'lucide-svelte';
 
   export let rating: number;
 
@@ -14,10 +14,16 @@
   {/each}
 
   {#if hasHalfStar}
-    <StarHalf class="text-primary w-4 h-4" fill="currentColor" />
+    <div class="flex relative">
+      <Star class="text-primary w-4 h-4" />
+      <StarHalf
+        class="text-primary w-4 h-4 absolute top-0"
+        fill="currentColor"
+      />
+    </div>
   {/if}
 
   {#each Array(emptyStars).fill(null) as _, index}
-    <StarOff class="text-gray-300 w-4 h-4" />
+    <Star class="text-gray-300 w-4 h-4" />
   {/each}
 </div>

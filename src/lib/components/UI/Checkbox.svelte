@@ -12,7 +12,7 @@
     class:bg-primary={active}
   >
     {#if active}
-      <Check class="text-white text-xs" />
+      <Check class="text-primary text-xs" />
     {/if}
   </div>
   {label}

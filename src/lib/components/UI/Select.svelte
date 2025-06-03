@@ -68,8 +68,22 @@
         class="flex items-center justify-between w-full text-m-regular font-bold py-2"
       >
         <span>{label}</span>
-        <button on:click={() => (isActive = false)}>
-          <X size={20} />
+        <button aria-label="close" on:click={() => (isActive = false)}>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 10.0002L3.33337 3.3335M10 10.0002L16.6667 16.6668M10 10.0002L16.6667 3.3335M10 10.0002L3.33337 16.6668"
+              stroke="#1A141F"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
         </button>
       </div>
 

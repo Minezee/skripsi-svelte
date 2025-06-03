@@ -1,5 +1,6 @@
 import { createQuery, createMutation, useQueryClient } from '@tanstack/svelte-query';
 import APIInstance from '$lib/axios/init';
+import { derived } from 'svelte/store';
 
 interface QueryKey {
     queryKey: [string, string];
@@ -48,12 +49,19 @@ export const useFetch = (endpoint: string, queryKey: string) => {
 
 export const usePostData = () => {
     const queryClient = useQueryClient();
-    return createMutation({
+    const mutation = createMutation({
         mutationFn: postData,
         onSuccess: () => {
             queryClient.invalidateQueries();
         },
     });
+
+    return ({
+        mutateAsync: derived(mutation, ($m) => $m.mutateAsync),
+        isLoading: derived(mutation, ($m) => $m.isPending),
+        isError: derived(mutation, ($m) => $m.isError),
+        error: derived(mutation, ($m) => $m.error),
+    })
 };
 
 export const useCheckout = () => {

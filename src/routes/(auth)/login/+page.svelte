@@ -6,39 +6,31 @@
 
   import Input from '$lib/components/UI/Input.svelte';
   import Checkbox from '$lib/components/UI/Checkbox.svelte';
+  import { usePostData } from '$lib/hooks';
+  import { derived } from 'svelte/store';
+  import { auth } from '$lib/store/auth';
 
   let username = '';
   let password = '';
   let remember = false;
-  let isLoading = false;
+
+  const { isLoading, mutateAsync } = usePostData();
 
   async function handleLogin() {
-    isLoading = true;
-    const loadingToast = toast.loading('Authenticating your credentials...');
+    const loginPayload = {
+      username: username,
+      password: password,
+    };
 
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+    $mutateAsync({ endpoint: '/auth/login', payload: loginPayload })
+      .then((res: any) => {
+        auth.setToken(res.token);
+        window.location.href = '/product';
+      })
+      .catch((err: any) => {
+        console.error('Login error:', err);
+        toast.error('Login failed. Please check your credentials.');
       });
-
-      if (!response.ok) throw new Error();
-
-      const { token } = await response.json();
-
-      // Set cookie (SvelteKit handles this differently)
-      document.cookie = `token=${token}; path=/; max-age=${remember ? 2592000 : 3600}`;
-
-      toast.dismiss(loadingToast);
-      toast.success('Welcome back!');
-      await goto('/product');
-    } catch (error) {
-      toast.dismiss(loadingToast);
-      toast.error('Invalid credentials');
-    } finally {
-      isLoading = false;
-    }
   }
 </script>
 
@@ -76,7 +68,7 @@
 
           <button
             on:click|preventDefault={handleLogin}
-            disabled={isLoading}
+            disabled={$isLoading}
             class="w-full py-2 text-white bg-primary rounded-lg mt-5 disabled:opacity-50"
           >
             {isLoading ? 'Signing in...' : 'Sign in'}

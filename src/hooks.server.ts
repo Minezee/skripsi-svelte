@@ -11,7 +11,7 @@
 //     }
 
 //     if (token && ['/login', '/register'].includes(route)) {
-//         throw redirect(302, '/dashboard');
+//         throw redirect(302, '/product');
 //     }
 
 //     if (token) {
