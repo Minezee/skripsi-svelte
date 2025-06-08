@@ -1,56 +1,12 @@
 // src/hooks/useFilters.ts
 import { writable, derived } from 'svelte/store';
-import { page } from '$app/stores';
 import type { ProductProps } from '../../types/product';
-import { SvelteURLSearchParams } from 'svelte/reactivity';
 
 export function useFilters(initialCategory: string, initialSort: string) {
     // Create writable stores for state
     const activeCategory = writable<string>(initialCategory);
     const sortCriteria = writable<string>(initialSort);
     const searchQuery = writable<string>('');
-
-    // Update URL when filters change
-    // const updateQueryParams = derived(
-    //     [activeCategory, sortCriteria, searchQuery, $page],
-    //     ([$activeCategory, $sortCriteria, $searchQuery, $page]) => {
-    //         const params = new URLSearchParams($page.url.searchParams.toString());
-
-    //         if ($activeCategory) {
-    //             params.set('category', $activeCategory);
-    //         } else {
-    //             params.delete('category');
-    //         }
-
-    //         if ($sortCriteria) {
-    //             params.set('sort', $sortCriteria);
-    //         } else {
-    //             params.delete('sort');
-    //         }
-
-    //         if ($searchQuery) {
-    //             params.set('search', $searchQuery);
-    //         } else {
-    //             params.delete('search');
-    //         }
-
-    //         // Update URL without page reload
-    //         history.pushState({}, '', `${$page.url.pathname}?${params.toString()}`);
-    //     }
-    // );
-
-    // Initialize from URL params
-    const initializeFromUrl = () => {
-        const params = new URLSearchParams();
-        activeCategory.set(params.get('category') || '');
-        sortCriteria.set(params.get('sort') || '');
-        searchQuery.set(params.get('search') || '');
-    };
-
-    // Run initialization when page store is ready
-    // if ($page) {
-    //     initializeFromUrl();
-    // }
 
     // Apply filters and sorting
     const applyFiltersAndSorting = (productData: ProductProps[]) => {

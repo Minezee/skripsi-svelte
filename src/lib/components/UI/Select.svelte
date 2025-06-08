@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ChevronDown, ChevronUp, X, Check } from 'lucide-svelte';
+  import { ChevronDown, ChevronUp, Check } from 'lucide-svelte';
 
   interface SelectOption {
     value: string;

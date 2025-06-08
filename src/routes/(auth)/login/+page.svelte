@@ -1,13 +1,10 @@
 <!-- src/routes/login/+page.svelte -->
 <script lang="ts">
-  import { enhance } from '$app/forms';
   import { toast } from 'svelte-sonner';
-  import { goto } from '$app/navigation';
 
   import Input from '$lib/components/UI/Input.svelte';
   import Checkbox from '$lib/components/UI/Checkbox.svelte';
   import { usePostData } from '$lib/hooks';
-  import { derived } from 'svelte/store';
   import { auth } from '$lib/store/auth';
 
   let username = '';

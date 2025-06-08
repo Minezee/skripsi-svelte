@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { cart } from '$lib/store/cart';
   import CartCard from '$lib/components/UI/CartCard.svelte';
   import { formatPrice } from '$lib/utils/helpers/formatPrice';
 
   // Initialize state
   let isLoading = false;
-  let snap: any;
 
   // Calculate total price
   $: totalPrice = $cart.reduce(

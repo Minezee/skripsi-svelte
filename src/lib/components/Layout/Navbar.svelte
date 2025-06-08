@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { page } from '$app/stores';
   import { cart } from '$lib/store/cart';
   import { auth } from '$lib/store/auth';
 
@@ -25,8 +24,6 @@
   onMount(() => {
     auth.initialize();
   });
-
-  $: console.log($cart, 'Cart Items Length');
 </script>
 
 <nav class="sticky z-50 right-0 left-0 top-0 bg-white/50 backdrop-blur-xl">

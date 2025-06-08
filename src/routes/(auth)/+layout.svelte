@@ -3,7 +3,6 @@
   import { auth } from '$lib/store/auth';
   import '../../app.css';
   import { onMount } from 'svelte';
-  import Navbar from '$lib/components/Layout/Navbar.svelte';
 
   const queryClient = new QueryClient();
 
