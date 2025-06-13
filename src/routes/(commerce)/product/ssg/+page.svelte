@@ -7,12 +7,11 @@
   import ProductCard from '$lib/components/UI/ProductCard.svelte';
   import Select from '$lib/components/UI/Select.svelte';
   import Searchbar from '$lib/components/UI/Searchbar.svelte';
-  import SkeletonCard from '$lib/components/UI/SkeletonCard.svelte';
-  import HomeBanner from '$lib/components/UI/HomeBanner.svelte';
 
   // @Data
   import { sortOption } from '$lib/utils/data/sortOption';
   import { arrayToObject } from '$lib/utils/helpers/arrayToObject';
+  import HomeBanner from '$lib/components/UI/HomeBanner.svelte';
 
   // Fetch data
   export let data;
